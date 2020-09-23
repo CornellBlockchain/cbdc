@@ -9,7 +9,7 @@ class Block {
   }
 
   static genesis() {
-    return new this("Genesis time", {}, "genesis last hash", "genesis hash");
+    return new this("Genesis time", "genesis last hash", {}, "genesis hash");
   }
 
   static hash(timestamp, lastHash, data) {
@@ -23,7 +23,7 @@ class Block {
 
     hash = Block.hash(timestamp, lastHash, data);
 
-    return new this(timestamp, data, lastHash, hash);
+    return new this(timestamp, lastHash, data, hash);
   }
 
   static blockHash(block) {
