@@ -1,4 +1,4 @@
-const Block = require('./block');
+const Block = require("./block");
 
 /**
  * describe is jest specific function
@@ -6,33 +6,32 @@ const Block = require('./block');
  * name of the object as string for which the test is written
  * function that will define a series of tests
  */
-describe("Block",()=>{
-
-    let data,lastBlock,block;
+describe("Block", () => {
+  let data, lastBlock, block;
+  /**
+   * beforeEach allows us to run some code before
+   * running any test
+   * example creating an instance
+   */
+  beforeEach(() => {
+    data = "bar";
+    lastBlock = Block.genesis();
+    block = Block.mineBlock(lastBlock, data);
+  });
+  /**
+   * it function is used to write unit tests
+   * first param is a description
+   * second param is callback arrow function
+   */
+  it("sets the `data` to match the input", () => {
     /**
-     * beforeEach allows us to run some code before
-     * running any test
-     * example creating an instance
+     * expect is similar to assert
+     * it expects something
      */
-    beforeEach(()=>{
-         data = 'bar';
-         lastBlock = Block.genesis();
-         block = Block.mineBlock(lastBlock,data);
-    });
-    /**
-     * it function is used to write unit tests
-     * first param is a description
-     * second param is callback arrow function
-     */
-    it("sets the `data` to match the input",()=>{
-        /**
-         * expect is similar to assert
-         * it expects something
-         */
-        expect(block.data).toEqual(data);
-    });
+    expect(block.data).toEqual(data);
+  });
 
-    it("sets the `lastHash` to match the hash of the last block",()=>{
-        expect(block.lastHash).toEqual(lastBlock.hash);
-    });
-})
+  it("sets the `lastHash` to match the hash of the last block", () => {
+    expect(block.lastHash).toEqual(lastBlock.hash);
+  });
+});
