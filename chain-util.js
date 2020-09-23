@@ -42,9 +42,7 @@ class ChainUtil {
    * @param {object} keyPair the key pair object from genKeyPair()
    * @returns {string} public key in hex string form
    */
-  static getPublicKey(keyPair) {
-    return keyPair.getPublic().encode("hex");
-  }
+  static getPublicKey(keyPair) {}
 
   /**
    * @todo
@@ -56,7 +54,6 @@ class ChainUtil {
    */
   static sign(keyPair, dataHash) {
     // Make sure you export DER encoded signature in an array with .toDER()
-    return keyPair.sign(dataHash).toDER();
   }
 
   /**
@@ -69,9 +66,7 @@ class ChainUtil {
    * @param {object} signature int array
    * @returns {boolean}
    */
-  static verifySignature(publicKey, dataHash, signature) {
-    return ec.keyFromPublic(publicKey, "hex").verify(dataHash, signature);
-  }
+  static verifySignature(publicKey, dataHash, signature) {}
 }
 
 module.exports = ChainUtil;
