@@ -42,7 +42,9 @@ class ChainUtil {
    * @param {object} keyPair the key pair object from genKeyPair()
    * @returns {string} public key in hex string form
    */
-  static getPublicKey(keyPair) {}
+  static getPublicKey(keyPair) {
+      
+  }
 
   /**
    * @todo
