@@ -1,0 +1,27 @@
+{
+  "name": "nodechain",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watchAll",
+    "dev": "nodemon api.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^25.1.0",
+    "nodemon": "^2.0.2"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "crypto-js": "^3.3.0",
+    "elliptic": "^6.5.3",
+    "express": "^4.17.1",
+    "ws": "^7.2.1"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
