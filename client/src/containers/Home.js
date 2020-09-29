@@ -13,6 +13,8 @@ import SendIcon from "@material-ui/icons/Send";
 
 import { increment, decrement } from "../store/reducers/stepCounter";
 
+import TransactionList from "./TransactionList.js";
+
 const Home = (props) => {
   return (
     <div>
@@ -25,14 +27,8 @@ const Home = (props) => {
         <Grid item>
           <Card style={{ margin: "5px" }}>
             <CardContent>
-              <Typography variant="headline" headlineMapping={"h1"}>
-                Balance
-              </Typography>
-              <Typography
-                align="center"
-                variant="subheading"
-                headlineMapping={"h1"}
-              >
+              <Typography variant="h5">Balance</Typography>
+              <Typography align="center" variant="subtitle1">
                 You have $5 remaining
               </Typography>
             </CardContent>
@@ -41,9 +37,7 @@ const Home = (props) => {
         <Grid item>
           <Card style={{ margin: "5px" }}>
             <CardContent>
-              <Typography variant="headline" headlineMapping={"h1"}>
-                Withdraw
-              </Typography>
+              <Typography variant="h5">Withdraw</Typography>
             </CardContent>
             <CardActions>
               <TextField
@@ -57,7 +51,14 @@ const Home = (props) => {
             </CardActions>
           </Card>
         </Grid>
-        <Grid item></Grid>
+        <Grid item>
+          <Card style={{ margin: "5px" }}>
+            <CardContent>
+              <Typography variant="h5">Transactions</Typography>
+            </CardContent>
+            <TransactionList />
+          </Card>
+        </Grid>
       </Grid>
     </div>
   );

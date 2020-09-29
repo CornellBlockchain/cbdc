@@ -36,7 +36,7 @@ const Header = (props) => {
           <MenuIcon />
         </IconButton>
         <Typography
-          variant="title"
+          variant="h4"
           color="inherit"
           noWrap
           className={classes.title}
