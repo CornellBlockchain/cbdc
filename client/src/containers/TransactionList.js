@@ -17,7 +17,7 @@ const useStyles = makeStyles({
 const rows = [
   {
     address: "0x29a34b823c87d289e758f9f24f75a8a927e8b9",
-    amount: "100",
+    amount: -100,
     timestamp: "12:00:00",
   },
 ];
@@ -30,7 +30,7 @@ const TransactionList = (props) => {
       <Table className={classes.table} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            <TableCell>Receipent</TableCell>
+            <TableCell>Address</TableCell>
             <TableCell align="right">Amount</TableCell>
             <TableCell align="right">Timestamp</TableCell>
           </TableRow>

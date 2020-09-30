@@ -36,8 +36,6 @@ class ChainUtil {
   }
 
   /**
-   * @todo
-   *
    * Get the public key in string form
    * @param {object} keyPair the key pair object from genKeyPair()
    * @returns {string} public key in hex string form
@@ -47,8 +45,24 @@ class ChainUtil {
   }
 
   /**
-   * @todo
-   *
+   * Get the private key in string form
+   * @param {object} keyPair the key pair object from genKeyPair()
+   * @returns {string} private key in hex string form
+   */
+  static getPrivateKey(keyPair) {
+    return keyPair.getPrivate("hex");
+  }
+
+  /**
+   * Get key pair object from private key
+   * @param {string} privateKey
+   * @returns {object} key pair
+   */
+  static keyPairFromPrivate(privateKey) {
+    return ec.keyFromPrivate(privateKey);
+  }
+
+  /**
    * Sign the data hash with the key pair
    * @param {object} keyPair the key pair object from genKeyPair()
    * @param {string} dataHash hash
@@ -60,8 +74,6 @@ class ChainUtil {
   }
 
   /**
-   * @todo
-   *
    * Verify the transaction signature to check its validity
    * using the method provided in EC module
    * @param {string} publicKey

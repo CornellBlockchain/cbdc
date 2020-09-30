@@ -1,39 +1,31 @@
-// const express = require("express");
-// const Blockchain = require("./blockchain");
-// const bodyParser = require("body-parser");
+const express = require("express");
+const bodyParser = require("body-parser");
+const Wallet = require("./wallet");
 
-// //get the port from the user or set the default port
-// const HTTP_PORT = process.env.HTTP_PORT || 3001;
+//get the port from the user or set the default port
+const HTTP_PORT = process.env.HTTP_PORT || 3001;
 
-// //create a new app
-// const app = express();
+//create a new app
+const app = express();
 
-// //using the blody parser middleware
-// app.use(bodyParser.json());
+//using the blody parser middleware
+app.use(bodyParser.json());
 
-// // create a new blockchain instance
-// const blockchain = new Blockchain();
-// const p2pserver = new P2pserver(blockchain);
+//EXPOSED APIs
 
-// //EXPOSED APIs
+app.get("/getNewWallet", (req, res) => {
+  const w = new Wallet();
+  const w2 = new Wallet(
+    "6156fecec41ea1efe37c6fdef285dd9208f864c64453235ee234a1502743cdbf"
+  );
+  res.json({ one: w.getKeyPairJSON(), two: w2.getKeyPairJSON() });
+});
 
-// //api to get the blocks
-// app.get("/blocks", (req, res) => {
-//   res.json(blockchain.chain);
-// });
+app.post("/mine", (req, res) => {
+  res.json("sdfsdf");
+});
 
-// //api to add blocks
-// app.post("/mine", (req, res) => {
-//   const block = blockchain.addBlock(req.body);
-//   console.log(`New block added: ${block.toString()}`);
-
-//   res.redirect("/blocks");
-//   p2pserver.syncChain();
-// });
-
-// // app server configurations
-// app.listen(HTTP_PORT, () => {
-//   console.log(`listening on port ${HTTP_PORT}`);
-// });
-
-// p2pserver.listen(); // starts the p2pserver
+// app server configurations
+app.listen(HTTP_PORT, () => {
+  console.log(`listening on port ${HTTP_PORT}`);
+});

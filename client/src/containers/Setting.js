@@ -11,6 +11,7 @@ import Switch from "@material-ui/core/Switch";
 import PaletteIcon from "@material-ui/icons/Palette";
 import CompareArrowsIcon from "@material-ui/icons/CompareArrows";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import VpnKeyIcon from "@material-ui/icons/VpnKey";
 
 import TextField from "@material-ui/core/TextField";
 
@@ -20,57 +21,117 @@ import { connect } from "react-redux";
 import { toggleThemeMode, swapThemeColors } from "../store/reducers/settings";
 import { Button } from "@material-ui/core";
 
-const Settings = (props) => (
-  <div>
-    <Typography variant="headline">Settings</Typography>
-    <Card>
-      <CardContent>
-        <List>
-          <ListItem>
-            <ListItemIcon>
-              <AccountCircleIcon />
-            </ListItemIcon>
-            <ListItemText primary="Account Address" />
-            <ListItemSecondaryAction>
-              <TextField
-                style={{ width: "1000px" }}
-                id="standard-basic"
-                label="Public Address"
-              />
-            </ListItemSecondaryAction>
-          </ListItem>
-          <ListItem>
-            <ListItemIcon>
-              <PaletteIcon />
-            </ListItemIcon>
-            <ListItemText primary="Dark Mode" />
-            <ListItemSecondaryAction>
-              <Switch
-                onChange={(e, checked) => props.toggleThemeMode(checked)}
-                checked={props.settings.darkMode}
-              />
-            </ListItemSecondaryAction>
-          </ListItem>
-          <ListItem>
-            <ListItemIcon>
-              <CompareArrowsIcon />
-            </ListItemIcon>
-            <ListItemText primary="Swap Colors" />
-            <ListItemSecondaryAction>
-              <Switch
-                onChange={(e, checked) => props.swapThemeColors(checked)}
-                checked={props.settings.colorsSwaped}
-              />
-            </ListItemSecondaryAction>
-          </ListItem>
-        </List>
-        <Button variant="contained" color="primary">
-          Update
-        </Button>
-      </CardContent>
-    </Card>
-  </div>
-);
+class Settings extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { publicKey: "", privateKey: "" };
+  }
+
+  render() {
+    return (
+      <div>
+        <Typography variant="headline">Settings</Typography>
+        <Card>
+          <CardContent>
+            <List>
+              <ListItem>
+                <ListItemIcon>
+                  <AccountCircleIcon />
+                </ListItemIcon>
+                <ListItemText primary="Account Address" />
+                <ListItemSecondaryAction>
+                  <TextField
+                    style={{ width: "1000px" }}
+                    id="standard-basic"
+                    label="Public Address"
+                    value={this.state.publicKey}
+                    onChange={(event) => {
+                      event.preventDefault();
+                      this.setState({ publicKey: event.target.value });
+                    }}
+                  />
+                </ListItemSecondaryAction>
+              </ListItem>
+
+              <ListItem>
+                <ListItemIcon>
+                  <VpnKeyIcon />
+                </ListItemIcon>
+                <ListItemText primary="Private Key" />
+                <ListItemSecondaryAction>
+                  <TextField
+                    style={{ width: "1000px" }}
+                    id="standard-basic"
+                    label="Private Key"
+                    defaultValue={
+                      localStorage.getItem("privateKey")
+                        ? localStorage.getItem("privateKey")
+                        : ""
+                    }
+                    onChange={(event) => {
+                      event.preventDefault();
+                      this.setState({ privateKey: event.target.value });
+                    }}
+                  />
+                </ListItemSecondaryAction>
+              </ListItem>
+              <ListItem>
+                <ListItemIcon>
+                  <PaletteIcon />
+                </ListItemIcon>
+                <ListItemText primary="Dark Mode" />
+                <ListItemSecondaryAction>
+                  <Switch
+                    onChange={(e, checked) =>
+                      this.props.toggleThemeMode(checked)
+                    }
+                    checked={this.props.settings.darkMode}
+                  />
+                </ListItemSecondaryAction>
+              </ListItem>
+              <ListItem>
+                <ListItemIcon>
+                  <CompareArrowsIcon />
+                </ListItemIcon>
+                <ListItemText primary="Swap Colors" />
+                <ListItemSecondaryAction>
+                  <Switch
+                    onChange={(e, checked) =>
+                      this.props.swapThemeColors(checked)
+                    }
+                    checked={this.props.settings.colorsSwaped}
+                  />
+                </ListItemSecondaryAction>
+              </ListItem>
+            </List>
+            <Button
+              style={{ margin: "2px" }}
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                localStorage.setItem("publicKey", this.state.publicKey);
+                localStorage.setItem("privateKey", this.state.privateKey);
+              }}
+            >
+              Update
+            </Button>
+
+            <Button
+              style={{ margin: "2px" }}
+              variant="contained"
+              color="secondary"
+              onClick={() => {
+                this.setState({ publicKey: "sdf" });
+              }}
+            >
+              Create New Wallet
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = (state) => {
   return {
