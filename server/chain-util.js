@@ -36,17 +36,33 @@ class ChainUtil {
   }
 
   /**
-   * @todo
-   *
    * Get the public key in string form
    * @param {object} keyPair the key pair object from genKeyPair()
    * @returns {string} public key in hex string form
    */
-  static getPublicKey(keyPair) {}
+  static getPublicKey(keyPair) {
+    return keyPair.getPublic().encode("hex");
+  }
 
   /**
-   * @todo
-   *
+   * Get the private key in string form
+   * @param {object} keyPair the key pair object from genKeyPair()
+   * @returns {string} private key in hex string form
+   */
+  static getPrivateKey(keyPair) {
+    return keyPair.getPrivate("hex");
+  }
+
+  /**
+   * Get key pair object from private key
+   * @param {string} privateKey
+   * @returns {object} key pair
+   */
+  static keyPairFromPrivate(privateKey) {
+    return ec.keyFromPrivate(privateKey);
+  }
+
+  /**
    * Sign the data hash with the key pair
    * @param {object} keyPair the key pair object from genKeyPair()
    * @param {string} dataHash hash
@@ -54,11 +70,10 @@ class ChainUtil {
    */
   static sign(keyPair, dataHash) {
     // Make sure you export DER encoded signature in an array with .toDER()
+    return keyPair.sign(dataHash).toDER();
   }
 
   /**
-   * @todo
-   *
    * Verify the transaction signature to check its validity
    * using the method provided in EC module
    * @param {string} publicKey
@@ -66,7 +81,9 @@ class ChainUtil {
    * @param {object} signature int array
    * @returns {boolean}
    */
-  static verifySignature(publicKey, dataHash, signature) {}
+  static verifySignature(publicKey, dataHash, signature) {
+    return ec.keyFromPublic(publicKey, "hex").verify(dataHash, signature);
+  }
 }
 
 module.exports = ChainUtil;
