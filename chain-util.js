@@ -43,7 +43,7 @@ class ChainUtil {
    * @returns {string} public key in hex string form
    */
   static getPublicKey(keyPair) {
-      return keyPair[0];
+      return keyPair.getPublic(,'hex');
   }
 
   /**
