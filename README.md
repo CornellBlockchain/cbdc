@@ -9,8 +9,5 @@
 5. `npm install`
 
 To run tests, `cd server` and then do `npm run test`
-
 To deploy front-end, `cd client` and do `npm run start`
-
 To deploy back-end, `cd server` and do `npm run dev`
-
