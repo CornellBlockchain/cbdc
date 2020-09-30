@@ -70,9 +70,6 @@ class ChainUtil {
    */
   static sign(keyPair, dataHash) {
     return keyPair.sign(dataHash).toDER();
-
-    // Make sure you export DER encoded signature in an array with .toDER()
-    return keyPair.sign(dataHash).toDER();
   }
 
   /**
