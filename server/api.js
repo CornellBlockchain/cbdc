@@ -13,12 +13,16 @@ app.use(bodyParser.json());
 
 //EXPOSED APIs
 
-app.get("/getNewWallet", (req, res) => {
+app.get("/generateWallet", (req, res) => {
   const w = new Wallet();
-  const w2 = new Wallet(
+  res.json(w.getKeyPairJSON());
+});
+
+app.get("/getWallet", (req, res) => {
+  const w = new Wallet(
     "6156fecec41ea1efe37c6fdef285dd9208f864c64453235ee234a1502743cdbf"
   );
-  res.json({ one: w.getKeyPairJSON(), two: w2.getKeyPairJSON() });
+  res.json(w.getKeyPairJSON());
 });
 
 app.post("/mine", (req, res) => {
