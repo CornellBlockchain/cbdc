@@ -17,6 +17,7 @@ import TextField from "@material-ui/core/TextField";
 
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import axios from "axios";
 
 import { toggleThemeMode, swapThemeColors } from "../store/reducers/settings";
 import { Button } from "@material-ui/core";
@@ -24,7 +25,36 @@ import { Button } from "@material-ui/core";
 class Settings extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { publicKey: "", privateKey: "" };
+    this.state = {
+      publicKey: localStorage.getItem("publicKey"),
+      privateKey: localStorage.getItem("privateKey"),
+    };
+  }
+
+  componentDidMount() {}
+
+  createNewWallet(event) {
+    event.preventDefault();
+    axios
+      .get("http://localhost:3001/generateWallet", {
+        headers: {
+          "Content-Type": "application/json",
+          Accepts: "application/json",
+          "Access-Control-Allow-Headers": "Content-Type",
+          "Access-Control-Allow-Origin": "*",
+        },
+      })
+      .then((result) => {
+        const keyPair = result.data;
+        console.log(keyPair.privateKey);
+        this.setState({
+          publicKey: keyPair.publicKey,
+          privateKey: keyPair.privateKey,
+        });
+
+        localStorage.setItem("publicKey", keyPair.publicKey);
+        localStorage.setItem("privateKey", keyPair.privateKey);
+      });
   }
 
   render() {
@@ -63,11 +93,7 @@ class Settings extends React.Component {
                     style={{ width: "1000px" }}
                     id="standard-basic"
                     label="Private Key"
-                    defaultValue={
-                      localStorage.getItem("privateKey")
-                        ? localStorage.getItem("privateKey")
-                        : ""
-                    }
+                    value={this.state.privateKey}
                     onChange={(event) => {
                       event.preventDefault();
                       this.setState({ privateKey: event.target.value });
@@ -120,8 +146,8 @@ class Settings extends React.Component {
               style={{ margin: "2px" }}
               variant="contained"
               color="secondary"
-              onClick={() => {
-                this.setState({ publicKey: "sdf" });
+              onClick={(event) => {
+                this.createNewWallet(event);
               }}
             >
               Create New Wallet
