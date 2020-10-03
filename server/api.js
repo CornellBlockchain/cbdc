@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const bodyParser = require("body-parser");
 const Wallet = require("./wallet");
 
@@ -12,6 +13,8 @@ const app = express();
 app.use(bodyParser.json());
 
 //EXPOSED APIs
+
+app.use(cors());
 
 app.get("/generateWallet", (req, res) => {
   const w = new Wallet();
