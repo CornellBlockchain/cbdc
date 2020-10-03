@@ -19,9 +19,7 @@ app.get("/generateWallet", (req, res) => {
 });
 
 app.get("/getWallet", (req, res) => {
-  const w = new Wallet(
-    "6156fecec41ea1efe37c6fdef285dd9208f864c64453235ee234a1502743cdbf"
-  );
+  const w = new Wallet(req.query.privateKey);
   res.json(w.getKeyPairJSON());
 });
 
