@@ -33,6 +33,3 @@ jobs:
 
       - name: Install dependencies for server
         run: cd server && npm install
-
-      - name: Run backend unit tests
-        run: npm run test-server
