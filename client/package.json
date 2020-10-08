@@ -1,5 +1,5 @@
 {
-  "name": "client",
+  "name": "cbdc-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -9,8 +9,8 @@
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "react-redux": "6.0.1",
-    "react-router": "5.0.0",
-    "react-router-dom": "5.0.0",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "2.1.8",
     "redux": "4.0.1",
     "redux-logger": "3.0.6",

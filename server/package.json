@@ -1,11 +1,12 @@
 {
-  "name": "nodechain",
+  "name": "cbdc-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "jest --watchAll",
-    "dev": "nodemon api.js"
+    "dev": "nodemon api.js",
+    "start": "node api.js"
   },
   "keywords": [],
   "author": "",
