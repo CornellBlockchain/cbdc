@@ -4,8 +4,10 @@
   "description": "Central Bank Digital Currency",
   "main": "index.js",
   "scripts": {
-    "start": "run-p client-dev server-dev",
-    "client-dev": "cd client && npm run start",
+    "start": "run-p client server",
+    "dev": "run-p client-dev server-dev",
+    "client": "cd client && npm run start",
+    "server": "cd server && npm run start",
     "server-dev": "cd server && npm run dev",
     "test-server": "cd server && npm run test"
   },
