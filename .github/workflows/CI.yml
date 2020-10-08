@@ -25,8 +25,14 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v1
 
-      - name: Install Dependencies
+      - name: Install dependencies for root directory
         run: npm install
+
+      - name: Install dependencies for client
+        run: cd client && npm install
+
+      - name: Install dependencies for server
+        run: cd server && npm install
 
       - name: Run backend unit tests
         run: npm run test-server
