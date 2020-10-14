@@ -13,7 +13,7 @@
   "license": "ISC",
   "devDependencies": {
     "jest": "^25.5.4",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.5"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
