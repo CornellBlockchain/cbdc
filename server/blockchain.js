@@ -9,6 +9,7 @@ const con = mysql.createConnection({
 
 class Blockchain {
   constructor() {
+    this.chain=[];
     con.connect((err) => {
        if(err){ console.log('Cannot connect to database');}
    });
