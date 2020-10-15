@@ -1,17 +1,18 @@
 {
-  "name": "nodechain",
+  "name": "cbdc-server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "jest --watchAll",
-    "dev": "nodemon api.js"
+    "dev": "nodemon api.js",
+    "start": "node api.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "jest": "^25.1.0",
+    "jest": "^25.5.4",
     "nodemon": "^2.0.2"
   },
   "dependencies": {
