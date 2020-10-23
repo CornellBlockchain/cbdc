@@ -1,15 +1,51 @@
 const Blockchain = require("./blockchain");
 const Block = require("./block");
-describe("Blockchain", () => {
-  let blockchain, blockchain2;
+const mysql = require('mysql');
 
-  beforeEach(() => {
-    blockchain = new Blockchain();
-    blockchain2 = new Blockchain();
+describe("Blockchain", () => {
+  let blockchain, blockchain2, chain;
+
+  let conn = mysql.createConnection({
+    host: 'cbdc.cjymkpun4qnd.us-east-1.rds.amazonaws.com',
+    port: 3306,
+    user: 'admin',
+    password: 'cornellblockchain',
+    database: 'blockchain'
+  });
+
+  beforeAll(done => {
+    chain = [];
+    conn.connect((err) => {
+      if (err) {
+        return;
+      }
+    });
+
+    conn.query('SELECT * FROM chain', (err, rows) => {
+      if (err) throw err;
+      let data = rows.sort((a, b) => {
+        return a.timestamp - b.timestamp;
+      });
+      if (data) {
+        data.forEach((row) => {
+          let block = new Block(row.timestamp, row.lasthash, row.data, row.hash);
+          chain.push(block);
+        })
+      } else {
+        chain = [Block.genesis()];
+      }
+      blockchain = new Blockchain(chain);
+      blockchain2 = new Blockchain(chain);
+      done();
+    });
+  });
+
+  afterAll(() => {
+    conn.end();
   });
 
   it("starts with the genesis block", () => {
-    expect(blockchain.chain[0]).toEqual(Block.genesis());
+    expect(blockchain.chain[0].hash).toEqual("genesis hash");
   });
 
   it("adds a new block", () => {
@@ -19,15 +55,13 @@ describe("Blockchain", () => {
   });
 
   it("validates a valid chain", () => {
-    blockchain2.addBlock("foo");
-    // conventional method for check true and false is toBe
-    expect(blockchain.isValidChain(blockchain2.chain)).toBe(true);
+    expect(blockchain.isValidChain(blockchain.chain)).toBe(true);
   });
 
   it("invalidates a chain with a corrupt the genesis block", () => {
     blockchain2.chain[0].data = "bad data";
 
-    expect(blockchain.isValidChain(blockchain2.chain)).toBe(false);
+    expect(blockchain2.isValidChain(blockchain2.chain)).toBe(false);
   });
 
   it("invalidates a corrput chain", () => {

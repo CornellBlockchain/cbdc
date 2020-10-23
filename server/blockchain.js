@@ -2,43 +2,8 @@ const Block = require("./block.js");
 const mysql = require('mysql');
 
 class Blockchain {
-  constructor() {
-    this.chain = [];
-
-    const conn = mysql.createConnection({
-        host: 'cbdc.cjymkpun4qnd.us-east-1.rds.amazonaws.com',
-        port: 3306,
-        user: 'admin',
-        password: 'cornellblockchain',
-        database: 'blockchain'
-    });
-
-    conn.connect((err) => {
-        if(err){
-            console.log('Error connecting to Db');
-            return;
-        }
-        console.log('Connection established');
-    });
-
-    conn.query('SELECT * FROM chain', (err, rows) => {
-        if(err) throw err;
-        let data = rows.sort((a, b) => {
-            return a.timestamp - b.timestamp;
-        });
-        if(data) {
-            data.forEach( (row) => {
-                let block = new Block(row.timestamp, row.lasthash, row.data, row.hash);
-                this.chain.push(block);
-            })
-        } else {
-            this.chain = [Block.genesis()];
-        }
-    });
-  }
-
-  getChain() {
-      console.log(this.chain);
+  constructor(chain) {
+    this.chain = chain;
   }
 
   addBlock(data) {
@@ -58,7 +23,7 @@ class Blockchain {
       if (
         block.lastHash !== lastBlock.hash ||
         block.hash !== Block.blockHash(block)
-      )
+      ) 
         return false;
     }
 
