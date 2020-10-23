@@ -36,6 +36,15 @@ class Transaction {
 
     return transaction;
   }
+
+  static verifyTransaction(transaction){
+    pubKey = transaction.input.address;
+    signature = transaction.input.signature;
+    dataHash = ChainUtil.hash(transaction.outputs);
+
+    return ChainUtil.verifySignature(pubKey, dataHash, signature);
+  }
+
 }
 
 module.exports = Transaction;
