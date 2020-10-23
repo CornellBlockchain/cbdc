@@ -13,7 +13,22 @@ class Blockchain {
     return block;
   }
 
-  isValidChain(chain) {
+  /**
+   * Writes {this.chain} to the AWS database
+   * Only updates the chain if
+   * 1. {this.chain} is longer than the chain in the DB
+   * 2. {this.chain} is valid
+   */
+  updateChainDB() {
+    // this.chain => AWS DB
+  }
+
+  /**
+   * Given a chain, return true if it is valid
+   * @param {array} chain
+   * @returns {boolean}
+   */
+  static isValidChain(chain) {
     if (JSON.stringify(chain[0]) !== JSON.stringify(Block.genesis()))
       return false;
 

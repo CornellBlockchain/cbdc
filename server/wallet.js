@@ -29,9 +29,11 @@ class Wallet {
     return { publicKey: this.#publicKey, privateKey: this.#privateKey };
   }
 
-  // createTransaction() {}
+  createTransaction() {}
 
-  // calculateBalance() {}
+  calculateBalance() {
+    return 5;
+  }
 }
 
 module.exports = Wallet;

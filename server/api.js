@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const bodyParser = require("body-parser");
 const Wallet = require("./wallet");
 
@@ -13,12 +14,16 @@ app.use(bodyParser.json());
 
 //EXPOSED APIs
 
-app.get("/getNewWallet", (req, res) => {
+app.use(cors());
+
+app.get("/generateWallet", (req, res) => {
   const w = new Wallet();
-  const w2 = new Wallet(
-    "6156fecec41ea1efe37c6fdef285dd9208f864c64453235ee234a1502743cdbf"
-  );
-  res.json({ one: w.getKeyPairJSON(), two: w2.getKeyPairJSON() });
+  res.json(w.getKeyPairJSON());
+});
+
+app.get("/getWallet", (req, res) => {
+  const w = new Wallet(req.query.privateKey);
+  res.json(w.getKeyPairJSON());
 });
 
 app.post("/mine", (req, res) => {
