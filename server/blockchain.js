@@ -28,7 +28,7 @@ class Blockchain {
    * @param {array} chain
    * @returns {boolean}
    */
-  static isValidChain(chain) {
+  isValidChain(chain) {
     if (JSON.stringify(chain[0]) !== JSON.stringify(Block.genesis()))
       return false;
 
