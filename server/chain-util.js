@@ -83,6 +83,10 @@ class ChainUtil {
   static verifySignature(publicKey, dataHash, signature) {
     return ec.keyFromPublic(publicKey, "hex").verify(dataHash, signature);
   }
+
+  static id(){
+    return uuidV1();
+  }
 }
 
 module.exports = ChainUtil;

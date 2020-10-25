@@ -38,9 +38,9 @@ class Transaction {
   }
 
   static verifyTransaction(transaction){
-    pubKey = transaction.input.address;
-    signature = transaction.input.signature;
-    dataHash = ChainUtil.hash(transaction.outputs);
+    let pubKey = transaction.input.address;
+    let signature = transaction.input.signature;
+    let dataHash = ChainUtil.hash(transaction.outputs);
 
     return ChainUtil.verifySignature(pubKey, dataHash, signature);
   }
