@@ -67,7 +67,20 @@ app.get("/getBalance", (req, res) => {
   
 });
 
-app.post("/mine", (req, res) => {
+app.post("/transact", (req, res) => {
+  // get post body data
+  // const data = req.body;
+
+  // instantiate wallet object with private key
+  // const w = new Wallet(data.privateKey);
+
+  // create transaction and get the transaction object
+
+  // use the transaction object to mine a block with the addBlock method under blockchain.js
+
+  // validate chain and update the AWS database
+
+  // give back some sort of response
   res.json("sdfsdf");
 });
 
