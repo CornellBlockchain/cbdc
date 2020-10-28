@@ -1,6 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const Wallet = require("./wallet");
+const Transaction = require("./transaction")
+const Blockchain = require("./blockchain");
+const Block = require("./block");
 
 //get the port from the user or set the default port
 const HTTP_PORT = process.env.HTTP_PORT || 3001;
@@ -28,4 +31,24 @@ app.post("/mine", (req, res) => {
 // app server configurations
 app.listen(HTTP_PORT, () => {
   console.log(`listening on port ${HTTP_PORT}`);
+});
+
+app.post("/transact", (req, res) =>{
+  try{
+    const wallet=new Wallet(req.body.senderPrivateKey);
+    const trans=new Transaction();
+    trans.newTransaction(wallet, req.body.recipientPublicKey, req.body.amount);
+    const bc=Blockchain(Block.genesis());
+    bc.addBlock(trans);
+    
+    res.json({
+      "status": 200,
+   });
+  }
+  catch(err) {
+    res.json({
+        "status": 400,
+        "error": err.message,
+     });
+  }
 });
