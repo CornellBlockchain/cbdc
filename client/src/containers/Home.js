@@ -44,11 +44,13 @@ const Home = (props) => {
                 style={{ width: "900px", margin: "5px" }}
                 id="standard-basic"
                 label="Public Address"
+                margin="normal"
               />
               <TextField
                 style={{ width: "900px", margin: "5px" }}
                 id="standard-basic"
                 label="Amount"
+                margin=normal
               />
               <Button color="primary" variant="contained">
                 Send <SendIcon style={{ marginLeft: "5px" }} />
