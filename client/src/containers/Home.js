@@ -41,19 +41,21 @@ const Home = (props) => {
             </CardContent>
             <CardActions>
               <TextField
-                style={{ width: "900px", margin: "5px" }}
+                style={{ width: "900px", margin: "5px", marginTop: -50 }}
                 id="standard-basic"
                 label="Public Address"
-                margin="normal"
-              />
+                />
               <TextField
-                style={{ width: "900px", margin: "5px" }}
+                style= {{ width: "900px",
+                        margin: "5px",
+                        marginTop: 50,
+                        marginLeft: -905}}
                 id="standard-basic"
                 label="Amount"
-                margin=normal
               />
-              <Button color="primary" variant="contained">
-                Send <SendIcon style={{ marginLeft: "5px" }} />
+              <Button color="primary" variant="contained"
+                      style = {{marginTop: 40, marginLeft: 50 }}>
+                Send <SendIcon style={{ marginLeft: "5px"}} />
               </Button>
             </CardActions>
           </Card>
