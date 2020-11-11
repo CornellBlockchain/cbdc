@@ -45,6 +45,11 @@ const Home = (props) => {
                 id="standard-basic"
                 label="Public Address"
               />
+              <TextField
+                style={{ width: "900px", margin: "5px" }}
+                id="standard-basic"
+                label="Amount"
+              />
               <Button color="primary" variant="contained">
                 Send <SendIcon style={{ marginLeft: "5px" }} />
               </Button>
